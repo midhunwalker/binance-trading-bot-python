@@ -80,8 +80,14 @@ def trade(
     except ValueError as e:
         print_error(f"Validation Error: {str(e)}")
         sys.exit(1)
+    except ConnectionError as e:
+        print_error(f"Network Error: {str(e)}\n\nPlease check your internet connection and try again.")
+        sys.exit(1)
+    except TimeoutError as e:
+        print_error(f"Timeout Error: {str(e)}\n\nThe request took too long. Please try again.")
+        sys.exit(1)
     except Exception as e:
-        print_error(f"Execution Error: {str(e)}")
+        print_error(f"Unexpected Error: {str(e)}\n\nPlease check the logs for more details.")
         sys.exit(1)
 
 
