@@ -1,5 +1,6 @@
 # Python
 __pycache__/
+*.pyc
 *.py[cod]
 *$py.class
 *.so
@@ -24,7 +25,7 @@ wheels/
 venv/
 env/
 ENV/
-.venv
+.venv/
 
 # IDE
 .vscode/
@@ -34,7 +35,7 @@ ENV/
 *~
 
 # Logs
-logs/*.log
+logs/
 *.log
 
 # Environment variables
