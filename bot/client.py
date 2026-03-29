@@ -29,6 +29,25 @@ class BinanceFuturesClient:
         
         logger.info(f"Initialized Binance Futures client with base URL: {base_url}")
 
+    def test_connection(self):
+        """
+        Test connection to Binance Futures API.
+
+        Returns:
+            bool: True if connection successful, False otherwise
+        """
+        try:
+            # Ping the server - lightweight endpoint
+            self.client.futures_ping()
+            logger.info("✅ Connection to Binance Futures API successful")
+            return True
+        except BinanceAPIException as e:
+            logger.error(f"❌ Connection to Binance Futures API failed: {e}")
+            return False
+        except Exception as e:
+            logger.error(f"❌ Unexpected error during connection test: {e}")
+            return False
+
     def place_order(self, **kwargs):
         """
         Place an order on Binance Futures.
