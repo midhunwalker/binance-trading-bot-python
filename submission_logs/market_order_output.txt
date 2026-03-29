@@ -1,0 +1,30 @@
+2026-03-30 00:50:26 - INFO - Logging configured successfully
+
+============================================================
+===  ORDER REQUEST  ===
+============================================================
+  Symbol:      BTCUSDT
+  Side:        BUY
+  Type:        MARKET
+  Quantity:    0.001
+============================================================
+
+2026-03-30 00:50:26 - INFO - === MARKET ORDER REQUEST ===
+2026-03-30 00:50:26 - INFO - Symbol: BTCUSDT, Side: BUY, Quantity: 0.001
+2026-03-30 00:50:26 - INFO - Validated params - Symbol: BTCUSDT, Side: BUY, Type: MARKET, Quantity: 0.001
+2026-03-30 00:50:27 - WARNING - No API credentials found in .env - using Mock Client
+2026-03-30 00:50:27 - WARNING - ⚠️  MOCK CLIENT ACTIVE - Using simulated trading (Binance API unavailable)
+2026-03-30 00:50:27 - INFO - Initialized Mock Binance Futures client
+2026-03-30 00:50:27 - INFO - 🎭 Mock order simulated - Order ID: 434857737, Status: FILLED
+2026-03-30 00:50:27 - INFO - === MARKET ORDER RESPONSE ===
+2026-03-30 00:50:27 - INFO - Order ID: 434857737, Status: FILLED, Executed Qty: 0.001, Avg Price: 65000.0
+
+============================================================
+===  ORDER RESULT  ===
+============================================================
+  Order ID:       434857737
+  Status:         FILLED
+  Executed Qty:   0.001
+  Avg Price:      65000.0
+============================================================
+

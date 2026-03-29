@@ -1,0 +1,31 @@
+2026-03-30 00:50:27 - INFO - Logging configured successfully
+
+============================================================
+===  ORDER REQUEST  ===
+============================================================
+  Symbol:      ETHUSDT
+  Side:        SELL
+  Type:        LIMIT
+  Quantity:    0.01
+  Price:       3500.0
+============================================================
+
+2026-03-30 00:50:27 - INFO - === LIMIT ORDER REQUEST ===
+2026-03-30 00:50:27 - INFO - Symbol: ETHUSDT, Side: SELL, Quantity: 0.01, Price: 3500.0
+2026-03-30 00:50:27 - INFO - Validated params - Symbol: ETHUSDT, Side: SELL, Type: LIMIT, Quantity: 0.01, Price: 3500.0, TimeInForce: GTC
+2026-03-30 00:50:28 - WARNING - No API credentials found in .env - using Mock Client
+2026-03-30 00:50:28 - WARNING - ⚠️  MOCK CLIENT ACTIVE - Using simulated trading (Binance API unavailable)
+2026-03-30 00:50:28 - INFO - Initialized Mock Binance Futures client
+2026-03-30 00:50:28 - INFO - 🎭 Mock order simulated - Order ID: 201026775, Status: NEW
+2026-03-30 00:50:28 - INFO - === LIMIT ORDER RESPONSE ===
+2026-03-30 00:50:28 - INFO - Order ID: 201026775, Status: NEW, Executed Qty: 0, Avg Price: 0
+
+============================================================
+===  ORDER RESULT  ===
+============================================================
+  Order ID:       201026775
+  Status:         NEW
+  Executed Qty:   0
+  Avg Price:      0
+============================================================
+
