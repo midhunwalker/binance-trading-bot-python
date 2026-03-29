@@ -6,26 +6,20 @@ from pathlib import Path
 from logging.handlers import RotatingFileHandler
 
 
-def setup_logging(
-    log_level: str = "INFO",
-    log_dir: str = "logs",
-    log_file: str = "trading_bot.log"
-) -> None:
+def setup_logging(log_level: str = "INFO") -> None:
     """
     Configure logging for the application.
 
     Args:
         log_level: Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
-        log_dir: Directory for log files
-        log_file: Log file name
     """
     # Create logs directory if it doesn't exist
-    log_path = Path(log_dir)
-    log_path.mkdir(parents=True, exist_ok=True)
+    log_dir = Path("logs")
+    log_dir.mkdir(exist_ok=True)
 
     # Define log format
     log_format = logging.Formatter(
-        '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        '%(asctime)s - %(levelname)s - %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S'
     )
 
@@ -39,10 +33,10 @@ def setup_logging(
     console_handler.setFormatter(log_format)
     root_logger.addHandler(console_handler)
 
-    # File handler with rotation
+    # File handler with rotation (10MB max, 5 backups)
     file_handler = RotatingFileHandler(
-        log_path / log_file,
-        maxBytes=10 * 1024 * 1024,  # 10 MB
+        log_dir / "trading.log",
+        maxBytes=10 * 1024 * 1024,
         backupCount=5
     )
     file_handler.setLevel(logging.DEBUG)
