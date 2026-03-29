@@ -1,9 +1,13 @@
 """Binance Futures API client wrapper"""
 
+import os
 import logging
-from typing import Dict, Optional
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
@@ -11,46 +15,37 @@ logger = logging.getLogger(__name__)
 class BinanceFuturesClient:
     """Wrapper for Binance Futures API operations"""
 
-    def __init__(self, api_key: str, api_secret: str, testnet: bool = False):
+    def __init__(self):
+        """Initialize Binance Futures client with testnet configuration"""
+        api_key = os.getenv('BINANCE_API_KEY')
+        api_secret = os.getenv('BINANCE_SECRET_KEY')
+        base_url = os.getenv('BASE_URL', 'https://testnet.binancefuture.com')
+
+        if not api_key or not api_secret:
+            raise ValueError("BINANCE_API_KEY and BINANCE_SECRET_KEY must be set in .env file")
+
+        self.client = Client(api_key, api_secret)
+        self.client.API_URL = base_url
+        
+        logger.info(f"Initialized Binance Futures client with base URL: {base_url}")
+
+    def place_order(self, **kwargs):
         """
-        Initialize Binance Futures client.
+        Place an order on Binance Futures.
 
         Args:
-            api_key: Binance API key
-            api_secret: Binance API secret
-            testnet: Use testnet if True
-        """
-        self.client = Client(api_key, api_secret, testnet=testnet)
-        self.testnet = testnet
-        logger.info(f"Initialized Binance Futures client (testnet={testnet})")
+            **kwargs: Order parameters (symbol, side, type, quantity, price, etc.)
 
-    def get_account_balance(self) -> Dict:
-        """Get futures account balance"""
-        try:
-            return self.client.futures_account_balance()
-        except BinanceAPIException as e:
-            logger.error(f"Error fetching account balance: {e}")
-            raise
+        Returns:
+            Order response from Binance
 
-    def get_position_info(self, symbol: Optional[str] = None) -> Dict:
-        """
-        Get current position information.
-
-        Args:
-            symbol: Trading pair symbol (e.g., 'BTCUSDT'). If None, returns all positions.
+        Raises:
+            BinanceAPIException: If order placement fails
         """
         try:
-            positions = self.client.futures_position_information(symbol=symbol)
-            return positions
+            order = self.client.futures_create_order(**kwargs)
+            logger.info(f"Order placed successfully: {order.get('orderId')}")
+            return order
         except BinanceAPIException as e:
-            logger.error(f"Error fetching position info: {e}")
-            raise
-
-    def get_symbol_price(self, symbol: str) -> float:
-        """Get current price for a symbol"""
-        try:
-            ticker = self.client.futures_symbol_ticker(symbol=symbol)
-            return float(ticker['price'])
-        except BinanceAPIException as e:
-            logger.error(f"Error fetching price for {symbol}: {e}")
+            logger.error(f"Failed to place order: {e}")
             raise
