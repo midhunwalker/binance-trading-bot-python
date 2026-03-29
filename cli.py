@@ -12,37 +12,38 @@ app = typer.Typer()
 
 def print_order_summary(symbol: str, side: str, order_type: str, quantity: float, price: Optional[float] = None):
     """Print order summary before execution"""
-    typer.echo("\n" + "="*50)
-    typer.echo("📊 ORDER SUMMARY")
-    typer.echo("="*50)
-    typer.echo(f"Symbol:   {symbol}")
-    typer.echo(f"Side:     {side}")
-    typer.echo(f"Type:     {order_type}")
-    typer.echo(f"Quantity: {quantity}")
+    typer.echo("\n" + "="*60)
+    typer.echo("===  ORDER REQUEST  ===")
+    typer.echo("="*60)
+    typer.echo(f"  Symbol:      {symbol}")
+    typer.echo(f"  Side:        {side}")
+    typer.echo(f"  Type:        {order_type}")
+    typer.echo(f"  Quantity:    {quantity}")
     if price:
-        typer.echo(f"Price:    {price}")
-    typer.echo("="*50 + "\n")
+        typer.echo(f"  Price:       {price}")
+    typer.echo("="*60 + "\n")
 
 
 def print_order_response(response: dict):
     """Print formatted order response"""
-    typer.echo("\n" + "="*50)
-    typer.echo("✅ ORDER EXECUTED SUCCESSFULLY")
-    typer.echo("="*50)
-    typer.echo(f"Order ID:       {response.get('orderId', 'N/A')}")
-    typer.echo(f"Status:         {response.get('status', 'N/A')}")
-    typer.echo(f"Executed Qty:   {response.get('executedQty', 'N/A')}")
-    typer.echo(f"Avg Price:      {response.get('avgPrice', 'N/A')}")
-    typer.echo("="*50 + "\n")
+    typer.echo("\n" + "="*60)
+    typer.echo("===  ORDER RESULT  ===")
+    typer.echo("="*60)
+    typer.echo(f"  Order ID:       {response.get('orderId', 'N/A')}")
+    typer.echo(f"  Status:         {response.get('status', 'N/A')}")
+    typer.echo(f"  Executed Qty:   {response.get('executedQty', 'N/A')}")
+    typer.echo(f"  Avg Price:      {response.get('avgPrice', 'N/A')}")
+    typer.echo("="*60 + "\n")
 
 
 def print_error(message: str):
     """Print formatted error message"""
-    typer.echo("\n" + "="*50)
-    typer.echo("❌ ERROR")
-    typer.echo("="*50)
-    typer.echo(f"{message}")
-    typer.echo("="*50 + "\n")
+    typer.echo("\n" + "="*60)
+    typer.echo("===  ERROR  ===")
+    typer.echo("="*60)
+    for line in message.split('\n'):
+        typer.echo(f"  {line}")
+    typer.echo("="*60 + "\n")
 
 
 @app.command()
@@ -98,4 +99,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    setup_logging()
+    app()
